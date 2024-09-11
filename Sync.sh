@@ -3,7 +3,7 @@
 #Script to Sync saves between devices
 
 #Important this script to sync saves from google drive 
-#downloaded data is from google drive and this override
+#download data is from google drive and this override
 #your local files if this is necesary, this script only
 #need to be run when turn on that device you need to sync
 #no when you finish to play.

@@ -8,12 +8,18 @@ route_drive=$3
 route="$path/$folder"
 
 download_from_drive() {
-    if rclone lsf "$route_drive/$folder.zip" > /dev/null 2>&1; then
-        rclone copy "$route_drive/$folder.zip" "$path"
-        unzip -o "$route.zip" -d "${route%.zip}" > /dev/null 2>&1
-        rm "$route.zip"
+    if [ -f "$route.txt" ]; then
+        if grep -q "Internet Error" "$route.txt"; then
+            echo "Before have a internet error, nothing to sync."
+        fi
     else
-        echo "Drive doesn't have saves to download."
+        if rclone lsf "$route_drive/$folder.zip" > /dev/null 2>&1; then
+            rclone copy "$route_drive/$folder.zip" "$path"
+            unzip -o "$route.zip" -d "${route%.zip}" > /dev/null 2>&1
+            rm "$route.zip"
+        else
+            echo "Drive doesn't have saves to download."
+        fi
     fi
 }
 
